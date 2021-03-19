@@ -1,81 +1,23 @@
-'use strict';
+
+angular.module('myApp.buscarImagenes', [])
 
 
-
-angular.module('myApp.buscarImagenes', ['ngRoute'])
-
-
-  .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/buscarImagenes', {
-      templateUrl: 'buscarImagenes/buscarImagenes.html',
-      controller: 'BuscarImagenesController'
-    });
-  }])
-
-  .controller('BuscarImagenesController', [function ($scope) {
+  .controller('BuscarImagenesController', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
     const accesKey = 'A_hUHjtgyir3Z8Tz6buW6tkPEAoC6iR_3SVFPPsrM9s';
     const endPoint = 'https://api.unsplash.com/search/photos';
-    let primerBusqueda = true;
-
-    async function setBusqueda(){
+    
+    $scope.setBusqueda = async function (){
       let busqueda = await document.getElementById("busqueda").value;
-      await alert(busqueda)
-      let response = await (await fetch(endPoint + '?query=' + busqueda + '&client_id=' + accesKey));
+      let response =  await fetch(endPoint + '?query=' + busqueda + '&client_id=' + accesKey);
       let jsonResponse = await response.json();
-      let imagesList = await jsonResponse.results
-
-      if (!primerBusqueda) {
-        console.log('entra');
-        document.body.removeChild(document.getElementById('imageContainer'));
-      } else {
-        primerBusqueda = false;
-      }
-
-      console.log(primerBusqueda);
-      let imageContainer = document.createElement("div");
-      imageContainer.id = "imageContainer"
-      document.body.appendChild(imageContainer);
-
-      for (let i = 0; i < imagesList.length; i++) {
-        const image = document.createElement('img');
-        image.src = imagesList[i].urls.thumb;
-        imageContainer.appendChild(image);
-      }
-      //let jsonResponse = await response.json();
-      //let imagesList = await jsonResponse.results;
-
-
-
-      //busqueda = document.getElementById('busqueda')
-    }
-    let formulario = document.getElementById("formulario");
-
-      formulario.addEventListener('submit', setBusqueda);
-
-    //createImages(setBusqueda());
-
-    function getImages(query) {
-     // let formulario = document.getElementById("formulario");
-
-      //formulario.addEventListener('submit', createImages);
-      /*
-
-      //console.log(imagesList);
-     createImages(imagesList);*/
+      $rootScope.imagesList = await jsonResponse.results;
     }
 
-    function createImages(imagesList) {
-      console.log("entra");
-      for (let i = 0; i < imagesList.length; i++) {
-        const image = document.createElement('img');
-        image.src = imagesList[i].urls.thumb;
-        console.log(image.src);
-        document.body.appendChild(image);
+    $scope.guardar = function (imagen) {
+      if ($rootScope.imagenesGuardadas.indexOf(imagen.urls.thumb) == -1){
+        $rootScope.imagenesGuardadas.push(imagen.urls.thumb);
+        imagen.liked_by_user = true;
       }
-
     }
- //   getImages(busqueda);
-
-
   }]);

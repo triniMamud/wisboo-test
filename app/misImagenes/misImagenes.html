@@ -1,2 +1,18 @@
-<p>misImagenes ANDA
-</p>
+<!DOCTYPE html>
+<link rel="stylesheet" href="../app.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  <body>
+    <div ng-controller="MisImagenesController" >
+
+        <h3>Imagenes Guardadas</h3>
+
+        <div class="container">
+          <div ng-repeat="imagenUrl in imagenesGuardadas" class="imgContainer">
+            <img src="{{ imagenUrl }}" alt="No se pudo cargar la imagen"/>
+          </div>
+        </div>
+    </div>   
+  </body>
+</html>

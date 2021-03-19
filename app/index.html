@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="myApp" class="no-js">
+<html lang="en" ng-app="myApp" class="no-js" ng-controller="AppController">
   <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
@@ -15,11 +15,10 @@
       rel="stylesheet"
       href="lib/html5-boilerplate/dist/css/normalize.css"
     />
-    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css" />
     <link rel="stylesheet" href="app.css" />
     <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   </head>
-  <body>
+  <body style="display: inline  ;">
     <ul class="menu">
       <li><a href="#!/buscarImagenes">Buscar imágenes</a></li>
       <li><a href="#!/misImagenes">Mis imágenes</a></li>

@@ -1,15 +1,30 @@
-'use strict';
+
 
 angular.module('myApp', [
   'ngRoute',
   'myApp.buscarImagenes',
   'myApp.misImagenes',
   'myApp.version'
-]).
-  config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
+])
+  .controller('AppController', ['$rootScope', function ($rootScope) {
+    $rootScope.imagenesGuardadas = [];
+    $rootScope.imagesList = [];
+  }])
 
-    $routeProvider.otherwise({ redirectTo: '/buscarImagenes' });
+  .config(['$routeProvider', function ($routeProvider) {
+    $routeProvider
+      .when("/",
+        {
+          redirectTo: '/buscarImagenes'
+        })
+      .when("/buscarImagenes", {
+        templateUrl: 'buscarImagenes/buscarImagenes.html',
+        controller: 'BuscarImagenesController'
+      })
+      .when("/misImagenes", {
+        templateUrl: 'misImagenes/misImagenes.html',
+        controller: 'MisImagenesController'
+      });
   }]);
 
 
