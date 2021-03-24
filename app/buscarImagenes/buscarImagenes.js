@@ -8,7 +8,7 @@ angular.module('myApp.buscarImagenes', [])
       let busqueda = document.getElementById("busqueda").value;
       let response = await fetch(window.__env.apiUrl + '?query=' + busqueda + '&client_id=' + window.__env.apiKey);
       let jsonResponse = await response.json();
-      $rootScope.imagesList = await jsonResponse.results;
+      $rootScope.imagesList = jsonResponse.results;
       $rootScope.loadIndex = 5;
     }
 
