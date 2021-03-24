@@ -13,11 +13,15 @@
         </form>
 
         <div class="container">                    
-            <div ng-repeat="imagen in imagesList" class="imgContainer">
+            <div ng-repeat="imagen in imagesList" class="imgContainer" ng-show="$index < loadIndex">
+
                 <span ng-if="!imagen.liked_by_user" class="material-icons saved" ng-click="guardar(imagen)">save</span>
-                <span ng-if="imagen.liked_by_user"  class="material-icons" ng-click="guardar(imagen)" >check_box</span>
+                <span ng-if="imagen.liked_by_user || window.localStorage.getItem(imagen.id) != null"  class="material-icons" ng-click="guardar(imagen)" >check_box</span>
                 <img src="{{imagen.urls.thumb}}" alt="{{imagen.alt_description}}"/>
             </div>
+        </div>
+        <div ng-if="loadIndex < imagesList.length">
+            <button id="loadMore" ng-click="cargarMas()">Cargar Mas</button>
         </div>
     </div>
     

@@ -9,7 +9,8 @@
     "angular": "^1.8.2",
     "angular-loader": "^1.7.5",
     "angular-route": "^1.7.5",
-    "html5-boilerplate": "0.0.1"
+    "html5-boilerplate": "0.0.1",
+    "ngstorage": "^0.3.11"
   },
   "devDependencies": {
     "angular-mocks": "^1.7.5",
